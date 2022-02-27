@@ -20,7 +20,10 @@ Quizás estas estrategias no sean factibles en la sociedad actual, pero confío 
 de trabajo pueda servir de ayuda a la hora de abarcar crisis epidemiológicas como la sufrida con
 el coronavirus.
 
-    <img width="600" alt="resumen modelo (1)" src="https://user-images.githubusercontent.com/65020012/155882093-8b7fcebf-cdb7-4301-8473-90b5f5455a0c.png">
+   <img width="600" alt="resumen modelo (1)" src="https://user-images.githubusercontent.com/65020012/155882093-8b7fcebf-cdb7-4301-8473-90b5f5455a0c.png">
 
 ## Carpetas
 
+- Scripts: Código realizado para la resolución del modelo
+- Plots: Gráficos realizados para describir el modelo
+- 
