@@ -20,7 +20,7 @@ Quizás estas estrategias no sean factibles en la sociedad actual, pero confío 
 de trabajo pueda servir de ayuda a la hora de abarcar crisis epidemiológicas como la sufrida con
 el coronavirus.
 
-<img width="359" alt="resumen modelo" src="https://user-images.githubusercontent.com/65020012/155881969-804164ec-03c2-45f5-824d-c2a9e2425f0f.PNG">
+
 
 ## Carpetas
 
