@@ -45,8 +45,8 @@ mapa_madr<-mapa[ind_mad,]
 mapa_madr_df<-as.data.frame(mapa_madr)
 tm_shape(mapa_madr) + tm_borders(alpha=.4) + tm_fill("SUM_POB_AS",style="cont",palette="Blues")
 
-mapa_madr_df[51,] ### Alcal� meco
-mapa_madr_df[269,] ### Vic�lvaro
+mapa_madr_df[51,] ### Alcalá meco
+mapa_madr_df[269,] ### Vicálvaro
 mapa_madr_df[100,] ### Coslada (distrito 3)
 mapa_madr_df$NOMBRE_CEL[130]
 mapa_madr_df$SUM_POB_AS[130]
@@ -146,7 +146,7 @@ cuarentena_ind_orig<-general_ind_orig
 
 ######################### grafico
 #######  grafica para la cuarentena
-cent<-51    # Pozuelo de Alarcón
+cent<-51    # Pozuelo de AlarcÃ³n
 cent2<-269
 cent3<-100
 mapa_madr_porc<-mapa_madr
@@ -181,7 +181,7 @@ origen2<-mapa_madr[which(mapa_madr$ID_GRUPO==cels_madr[[cent2]]),]
 origen2_nombre<-as.character(as.data.frame(mapa_madr[which(mapa_madr$ID_GRUPO==cels_madr[[cent2]]),])$NOMBRE_CEL)
 origen3<-mapa_madr[which(mapa_madr$ID_GRUPO==cels_madr[[cent3]]),]
 origen3_nombre<-as.character(as.data.frame(mapa_madr[which(mapa_madr$ID_GRUPO==cels_madr[[cent3]]),])$NOMBRE_CEL)
-titulo=paste("D�a",j,"-",fechas[j])
+titulo=paste("Día",j,"-",fechas[j])
 Pr[[j]]<-tm_shape(mapa_madr) + tm_borders(alpha=.4) + tm_shape(dest_flux) + tm_fill("PORC",stype="cont",breaks=seq(0,5,1),palette="Blues") + tm_shape(origen) + tm_fill(col="black") + tm_shape(dest_flux2) + tm_fill("PORC",stype="cont",breaks=seq(0,5,1),palette="Greens") + tm_shape(origen2) + tm_fill(col="black") + tm_shape(dest_flux3) + tm_fill("PORC",stype="cont",breaks=seq(0,5,1),palette="Reds") + tm_shape(origen3) + tm_fill(col="black") + tm_layout(title = titulo, title.position=c("right","bottom"))
 
 }}
@@ -253,8 +253,8 @@ surrogados_ind_orig<-general_ind_orig<-nov_ind_orig
 
 
 #################  grafica para un dia normal de noviembre de 2019
-cent<-51    # Alcal� meco
-cent2<-  269  # Vic�lvaro
+cent<-51    # Alcalá meco
+cent2<-  269  # Vicálvaro
 cent3<-100   # Coslada (distrito 1)
 mapa_madr_porc<-mapa_madr
 mapa_madr_porc$PORC<-0
@@ -353,7 +353,7 @@ E<-cbind(E,E1)
 N <- matrix(c(0, 0, 2, 0,0,0,0,0), nrow = 8, ncol = 1,          # La primera columna que dice que los de "H" "pasan" dos filas hacia abajo
 dimnames = list(c("S","I","H","R","D","QI","QS","QR"), "1"))    # ,sea a "D" (muertes en el hospital)
 
-######### a partir de aqu� es para las cuarentenas
+######### a partir de aquí es para las cuarentenas
 N1 <- matrix(c(6, 0, 0, 0,0,0,0,0), nrow = 8, ncol = 1,         # Esto es para los I -> QI 
 dimnames = list(c("S","I","H","R","D","QI","QS","QR"), "2"))    # 
 N<-cbind(N,N1)  
@@ -390,7 +390,7 @@ g_data<-c(b = 0.39, g = 0.2, a=0.096, d=0.89)
 #https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/index.html
 #g_data<-c(b = 0.14, g = 0.05, a=0, d=0     #desacoplado, solo SIR
 
-print(g_data[1]/g_data[2]) #Valor par�metro Ro
+print(g_data[1]/g_data[2]) #Valor parámetro Ro
 
 
 #################  events ------->  event time node dest n proportion select shift
@@ -399,7 +399,7 @@ ini_V <-  120
 ini_Q <- 90      #inicio Cuarentena
 fin_Q <- 240  #fin Cuarentena
 prop_pob_q <- 0    #proporcion de poblacion de este compartimiento que pasa a Q
-prop_pob_v <- 0.1  #proporci�n de poblaci�n que se vacuna diariamente
+prop_pob_v <- 0.1  #proporción de población que se vacuna diariamente
 
 tiempo<-rep(seq(1,tail(tt,1)), each=ndat)
 ####### esto hace un 11,1% pase de compartimento H -> D  (muertes en el hospital)
@@ -505,20 +505,20 @@ dat <- trajectory(result)
 View(dat)
 plot(result)
 
-prevalence_I <- prevalence(result, I ~ .)## Calcula la proporci�n de infectados en el conjunto de la poblaci�n para cada periodo. ## Si queremos ver la prevalencia d eun nodo en concreto (por ejemplo el 10) se hara as� : prevalence(result, I ~ ., index = 10)
+prevalence_I <- prevalence(result, I ~ .)## Calcula la proporción de infectados en el conjunto de la población para cada periodo. ## Si queremos ver la prevalencia d eun nodo en concreto (por ejemplo el 10) se hara así : prevalence(result, I ~ ., index = 10)
 plot(prevalence_I)
 max_p_I <- max(prevalence_I$prevalence)
 
 
-prevalence_H <- prevalence(result, H ~ .) ## Calcula la proporci�n de hospitalizados en el conjunto de la poblaci�n para cada periodo
+prevalence_H <- prevalence(result, H ~ .) ## Calcula la proporción de hospitalizados en el conjunto de la población para cada periodo
 plot(prevalence_H)
 max_p_H <- max(prevalence_H$prevalence)
 
 prevalence_H_vector <- prevalence_H[,2]
 prevalence_I_H <- cbind(prevalence_I, prevalence_H = prevalence_H_vector)
-write.xlsx(prevalence_I_H, "prevalenceIH Ro = 1.96 con vacunaci�n.xlsx")
+write.xlsx(prevalence_I_H, "prevalenceIH Ro = 1.96 con vacunación.xlsx")
 
-prevalence_D <- prevalence(result, D ~ .) ## Calcula la proporci�n de defunciones en el conjunto de la poblaci�n para cada periodo
+prevalence_D <- prevalence(result, D ~ .) ## Calcula la proporción de defunciones en el conjunto de la población para cada periodo
 plot(prevalence_D)
 max_p_D <- max(prevalence_D$prevalence)
 
@@ -565,7 +565,7 @@ ggplot(prevalence_I_H, aes(x = time)) +
   theme_elegante()
 
 
-# Representamos curva de infectados sin vacunaci�n vs con vacunaci�n
+# Representamos curva de infectados sin vacunación vs con vacunación
 
 prevalenceIH_normal <- read_excel("prevalenceIH Ro = 1.96 sin eventos.xlsx")
 
@@ -605,7 +605,7 @@ ggplot(prevalenceH_NormalvsV) +
 
 ####### Elaboramos las proporciones de los nodos a representar
 
-# proporción nodo 130
+# proporciÃ³n nodo 130
 
 n_node130 <- tmp[130]
 
@@ -618,7 +618,7 @@ i <- dat %>% filter(node == 130) %>%
              R = R/n_node130,
              D = D/n_node130)
 
-# proporción nodo 38
+# proporciÃ³n nodo 38
 
 n_node38 <- tmp[38]
 
@@ -631,7 +631,7 @@ i2 <- dat %>% filter(node == 38) %>%
              R = R/n_node38,
              D = D/n_node38)
 
-#Población nodo 230
+#PoblaciÃ³n nodo 230
 
 n_node230 <- tmp[230]
 
@@ -644,13 +644,13 @@ i3 <- dat %>% filter(node == 230) %>%
              R = R/n_node230,
              D = D/n_node230)
 
-# Data frame con la proporción de los nodos escogidos
+# Data frame con la proporciÃ³n de los nodos escogidos
 
 prop_nodes <- rbind(i, i2, i3)
 head(prop_nodes)
 tail(prop_nodes)
 
-##### Representamos para los nodos 130 (Pozuelo de Alarcón), 38 (Colmenarejo), 230 (Madrid Aplomeras sureste-1)
+##### Representamos para los nodos 130 (Pozuelo de AlarcÃ³n), 38 (Colmenarejo), 230 (Madrid Aplomeras sureste-1)
 
 ggplot(prop_nodes, aes(x = time)) + 
   geom_line(aes(y = S, colour = "S"), se = F) +
@@ -689,9 +689,9 @@ ii=0
 for (i in seq(1,9)) {
 ii=ii+1
 trajecto_df<-as.data.frame(trajectory(result,node=big_cities[i]))
-gra[[ii]]<-xyplot( S+R+H+I ~ time, data=trajecto_df, type="l",xlim=c(30,300), lwd=5,main=as.character(mapa_madr_df$NOMBRE_CEL[big_cities[i]]),xlab="Dias",ylab="Población")
+gra[[ii]]<-xyplot( S+R+H+I ~ time, data=trajecto_df, type="l",xlim=c(30,300), lwd=5,main=as.character(mapa_madr_df$NOMBRE_CEL[big_cities[i]]),xlab="Dias",ylab="PoblaciÃ³n")
 #x11()
-#inmunidad de rebaño
+#inmunidad de rebaÃ±o
 #plot(trajecto_df$R/(trajecto_df$S+trajecto_df$R+trajecto_df$D))
 }
 grid.arrange(gra[[1]],gra[[2]],gra[[3]],gra[[4]],gra[[5]],gra[[6]],gra[[7]],gra[[8]],gra[[9]])
