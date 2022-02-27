@@ -5,7 +5,7 @@ library(extrafont)
 library(forecast)
 library(lubridate)
 
-####### esta es la base de datos española
+####### esta es la base de datos espaÃ±ola
 #sacada de https://github.com/datadista/datasets/tree/master/COVID%2019
 ccaa_casos<-as.data.frame(read_csv("https://raw.githubusercontent.com/datadista/datasets/master/COVID%2019/ccaa_covid19_casos.csv"))
 ccaa_casos_long<-as.data.frame(read_csv("https://raw.githubusercontent.com/datadista/datasets/master/COVID%2019/ccaa_covid19_casos_long.csv"))
@@ -38,20 +38,20 @@ max(datos_madrid$Hospitalizados) #1930
 
 colnames(datos_madrid_tests)[1] <- "Fecha"
 datos_madrid_tests <- datos_madrid_tests %>% filter(Fecha > "2020-07-05") %>% select(Fecha, Total_Pruebas_x_1000hab.)
-datos_madrid_tests$Nº_semana <- 1:18
+datos_madrid_tests$NÂº_semana <- 1:18
 class(datos_madrid_tests$Total_Pruebas_x_1000hab.)
 datos_madrid_tests$Total_Pruebas_x_1000hab. <- sub(",",".",datos_madrid_tests$Total_Pruebas_x_1000hab.)
 datos_madrid_tests <- transform(datos_madrid_tests,Total_Pruebas_x_1000hab.= as.numeric(Total_Pruebas_x_1000hab.))
 
-### Representación nº de test
+### RepresentaciÃ³n nÂº de test
 
-ggplot(datos_madrid_tests,aes(x = Nº_semana, y = Total_Pruebas_x_1000hab.)) + 
+ggplot(datos_madrid_tests,aes(x = NÂº_semana, y = Total_Pruebas_x_1000hab.)) + 
   geom_line() + theme_elegante() + 
   theme (plot.title = element_text (face = "bold")) +
   labs(x = NULL, y = NULL,
        title = "Total Pruebas x 1000 habitantes",
        subtitle = "Datos semanales de la Comunidad de Madrid (Jul 2020 - Nov 2020)",
-       caption = "\n Fuente: Datos recopilados de Datadista a través de Github")
+       caption = "\n Fuente: Datos recopilados de Datadista a travÃ©s de Github")
  
 
 ### Datos semanales en la C.Madrid
@@ -96,11 +96,11 @@ datos_madrid_sem_2020 <- datos_madrid_sem_2020 %>% mutate( mean_prop_hosp = mean
 
 colnames(datos_madrid_sem_2020)[1] <- "week"
 
-datos_madrid_sem_2020$Nº_semana <- 1:30
+datos_madrid_sem_2020$NÂº_semana <- 1:30
 
-# Elaboramos un modelo para ver como explica el número de test la variación de las proporciones
+# Elaboramos un modelo para ver como explica el nÃºmero de test la variaciÃ³n de las proporciones
 
-datos_madrid_sem_2020_2 <- datos_madrid_sem_2020 %>% filter(Nº_semana < 19)
+datos_madrid_sem_2020_2 <- datos_madrid_sem_2020 %>% filter(NÂº_semana < 19)
 
 prop_hosp <- datos_madrid_sem_2020_2[[5]]
 prop_def <- datos_madrid_sem_2020_2[[6]]
@@ -109,57 +109,57 @@ test <- datos_madrid_tests[[2]]
 
 lm
 
-# Proporción diaria de infectados que son hospitalizados semanales
+# ProporciÃ³n diaria de infectados que son hospitalizados semanales
 
-ggplot(datos_madrid_sem_2020, aes(x = Nº_semana, y = prop_hosp)) + 
+ggplot(datos_madrid_sem_2020, aes(x = NÂº_semana, y = prop_hosp)) + 
   geom_path() + theme_elegante() +
   geom_line(aes(y = mean_prop_hosp), col = "red", size = 0.8, linetype = 2) + 
   theme (plot.title = element_text (face = "bold")) +
   labs(x = NULL,y = NULL, 
-       title = "Proporción de infectados que son hospitalizados",
+       title = "ProporciÃ³n de infectados que son hospitalizados",
        subtitle = "Datos semanales de la Comunidad de Madrid (Sept 2020- Mar 2021)",
-       caption = "\n Fuente: Datos recopilados de Datadista a través de Github")
+       caption = "\n Fuente: Datos recopilados de Datadista a travÃ©s de Github")
 
 prop_hosp <- pull(datos_madrid_sem_2020, prop_hosp)
 class(prop_hosp)
 
-adf.test(prop_hosp, alternative="stationary", k=0) # No se rechaza la hipótesis nula de no estacionariedad en media
+adf.test(prop_hosp, alternative="stationary", k=0) # No se rechaza la hipÃ³tesis nula de no estacionariedad en media
 
 
-# Proporción diaria de infectados que mueren
+# ProporciÃ³n diaria de infectados que mueren
 
-ggplot(datos_madrid_sem_2020, aes(x = Nº_semana, y = prop_def)) + 
+ggplot(datos_madrid_sem_2020, aes(x = NÂº_semana, y = prop_def)) + 
   geom_line() + theme_elegante() +
   geom_line(aes(y = mean_prop_def), col = "red", size = 0.8, linetype = 2) +
   theme (plot.title = element_text (face = "bold")) +
   labs(x = NULL,y = NULL, 
-       title = "Proporción de infectados que fallecen",
+       title = "ProporciÃ³n de infectados que fallecen",
        subtitle = "Datos semanales de la Comunidad de Madrid (Sept 2020- Mar 2021)",
-       caption = "\n Fuente: Datos recopilados de Datadista a través de Github")
+       caption = "\n Fuente: Datos recopilados de Datadista a travÃ©s de Github")
 
 prop_def <- pull(datos_madrid_sem_2020, prop_def)
 class(prop_def)
 
-adf.test(prop_def, alternative="stationary", k=0) # No se rechaza la hipótesis nula de no estacionariedad en media
+adf.test(prop_def, alternative="stationary", k=0) # No se rechaza la hipÃ³tesis nula de no estacionariedad en media
 
-# Proporción diaria de infectados que se recuperan
+# ProporciÃ³n diaria de infectados que se recuperan
 
-ggplot(datos_madrid_sem_2020, aes(x = Nº_semana, y = prop_rec)) + 
+ggplot(datos_madrid_sem_2020, aes(x = NÂº_semana, y = prop_rec)) + 
    geom_line() + theme_elegante() +
   geom_line(aes(y = mean_prop_rec), col = "red", size = 0.8, linetype = 2) + 
   theme (plot.title = element_text (face = "bold")) +
   labs(x = NULL,y = NULL, 
-       title = "Proporción de hospitalizados que se recuperan",
+       title = "ProporciÃ³n de hospitalizados que se recuperan",
        subtitle = "Datos semanales de la Comunidad de Madrid (Sept 2020- Mar 2021)",
-       caption = "\n Fuente: Datos recopilados de Datadista a través de Github") 
+       caption = "\n Fuente: Datos recopilados de Datadista a travÃ©s de Github") 
   
 
 prop_rec <- pull(datos_madrid_sem_2020, prop_rec)
 class(prop_rec)
 
-adf.test(prop_rec, alternative="stationary", k=0) # No se rechaza la hipótesis nula de no estacionariedad en media
+adf.test(prop_rec, alternative="stationary", k=0) # No se rechaza la hipÃ³tesis nula de no estacionariedad en media
 
-#### Porcentaje de muertos por Covid en cada Comunidad autónoma 
+#### Porcentaje de muertos por Covid en cada Comunidad autÃ³noma 
 
 kaka_2 <- kaka %>% group_by(CCAA) %>%
           summarise(Casos = sum(Casos),
@@ -182,7 +182,7 @@ kaka_3 <- kaka %>% filter(Fecha > "2020-07-05") %>%
 
 kaka_3 <- kaka_3[c(-19, -11, -16, -4, -6),]
 
-#### Función para hacer gráficos más refinados
+#### FunciÃ³n para hacer grÃ¡ficos mÃ¡s refinados
 
 theme_elegante <- function(base_size = 10,
                            base_family = "Raleway"
