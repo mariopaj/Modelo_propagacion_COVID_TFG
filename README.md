@@ -27,4 +27,4 @@ el coronavirus.
 - Scripts: Código realizado para la resolución del modelo
 - Plots: Gráficos realizados para describir el modelo
 - Paper del trabajo: Descripción detallada de todod el trabajo realizado
-- 
+- Predicción parámetro Ro: XLSX, donde se describe la simulación del parámetro Ro
